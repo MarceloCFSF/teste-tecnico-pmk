@@ -1,8 +1,13 @@
 <?php
 
-include 'utils.php';
+namespace Config;
 
-loadEnv(__DIR__ . '/.env');
+use App\Helpers\EnvHelper;
+use Exception;
+use PDO;
+use PDOException;
+
+EnvHelper::loadEnv();
 
 class Database
 {
