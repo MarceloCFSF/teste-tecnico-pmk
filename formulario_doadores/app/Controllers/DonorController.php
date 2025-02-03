@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\DTOs\DonationDTO;
 use App\DTOs\DonorDTO;
 use App\Exceptions\ValidationException;
 use App\Services\DonorService;
@@ -20,8 +21,10 @@ class DonorController {
 
   public function store(array $data) {
     try {
-      $dto = new DonorDTO($data);
-      $this->service->create($dto);
+      $donor = new DonorDTO($data);
+      $donation = new DonationDTO($data);
+
+      $this->service->create($donor, $donation);
       header('Location: success.php');
       exit;
     } catch (ValidationException $e) {

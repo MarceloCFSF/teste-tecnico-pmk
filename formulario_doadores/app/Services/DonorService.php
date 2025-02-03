@@ -2,27 +2,38 @@
 
 namespace App\Services;
 
+use App\DTOs\DonationDTO;
 use App\DTOs\DonorDTO;
 use App\Exceptions\ValidationException;
+use App\Repositories\DonationRepository;
 use App\Repositories\DonorRepository;
+use App\Validators\DonationValidator;
 use App\Validators\DonorValidator;
 
 class DonorService {
-  private DonorRepository $repository;
+  private DonorRepository $donorRepository;
+  private DonationRepository $donationRepository;
 
-  public function __construct(DonorRepository $repository)
+  public function __construct(
+    DonorRepository $donorRepository,
+    DonationRepository $donationRepository
+  )
   {
-    $this->repository = $repository; 
+    $this->donorRepository = $donorRepository; 
+    $this->donationRepository = $donationRepository; 
   }
 
-  public function create(DonorDTO $dto)
+  public function create(DonorDTO $donor, DonationDTO $donation)
   {
-    $errors = DonorValidator::validate($dto);
+    $donorErrors = DonorValidator::validate($donor);
+    $donationErrors = DonationValidator::validate($donation);
+    $errors = array_merge($donorErrors, $donationErrors);
 
     if (!empty($errors)) {
       throw new ValidationException($errors);
     }
 
-    $this->repository->create($dto);
+    $donor_id = $this->donorRepository->create($donor);
+    $this->donationRepository->create($donation, $donor_id);
   }
 }

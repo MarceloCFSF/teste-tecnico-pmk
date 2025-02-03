@@ -13,7 +13,7 @@ class DonorRepository {
     $this->pdo = $pdo; 
   }
 
-  public function create(DonorDTO $donor) {
+  public function create(DonorDTO $donor): int {
     $query = "INSERT INTO donors (
       name,
       email,
@@ -37,6 +37,7 @@ class DonorRepository {
       :state,
       :city
     )";
+
     $params = [
       'name' => $donor->name,
       'email' => $donor->email,
@@ -51,7 +52,8 @@ class DonorRepository {
     ];
 
     $smt = $this->pdo->prepare($query);
+    $smt->execute($params);
 
-    return $smt->execute($params);
+    return $this->pdo->lastInsertId();
   }
 }

@@ -46,26 +46,45 @@ $form = new FormHandler();
     <fieldset>
       <legend>Doação</legend>
 
-      <label for="interval">Intervalo de doação</label>
-      <select name="interval" id="interval">
+      <label for="payment_interval">Intervalo de doação</label>
+      <select name="payment_interval" id="payment_interval">
         <option value="">Selecione</option>
         <option value="unique">Único</option>
         <option value="bimonthly">Bimestral</option>
         <option value="semi-annual">Semestral</option>
         <option value="annual">anual</option>
       </select>
+      <?= $form->error('payment_interval') ?>
 
-      <label for="donation">Valor da doação</label>
-      <input id="donation" name="donation" type="number">
+      <label for="value">Valor da doação</label>
+      <input id="value" name="value" type="number">
+      <?= $form->error('value') ?>
 
       <fieldset>
         <legend>Selecione a forma de pagamento</legend>
-        <input type="radio" id="credit" name="paymentMethod">
+        <input type="radio" id="credit" value="credit" name="payment_type" onchange="toggleInput()">
         <label for="credit">Crédito</label>
 
-        <input type="radio" id="debit" name="paymentMethod">
+        <input type="radio" id="debit" value="debit" name="payment_type" onchange="toggleInput()">
         <label for="debit">Débito</label>
       </fieldset>
+      <?= $form->error('payment_type') ?>
+      
+      <div id="debit_field" style="display: none;">
+        <label for="account">Número da Conta</label>
+        <input id="account" name="account" type="number">
+        <?= $form->error('account') ?>
+      </div>
+
+      <div id="credit_field" style="display: none;">
+        <label for="first_card_numbers">Primeiros números do cartão</label>
+        <input id="first_card_numbers" name="first_card_numbers" type="number">
+        <?= $form->error('first_card_numbers') ?>
+        
+        <label for="last_card_numbers">Últimos números do cartão</label>
+        <input id="last_card_numbers" name="last_card_numbers" type="number">
+        <?= $form->error('last_card_numbers') ?>
+      </div>
     </fieldset>
 
     <fieldset>
@@ -94,6 +113,8 @@ $form = new FormHandler();
 
     <button type="submit">Enviar</button>
   </form>
+
+  <script src="/assets/js/form.js"></script>
 </body>
 
 </html>
