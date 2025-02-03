@@ -4,8 +4,12 @@ namespace App\Helpers;
 
 class EnvHelper
 {
-  public static function loadEnv($file = '.env')
+  public static function loadEnv($file = null)
   {
+    if ($file === null) {
+      $file = $_SERVER['DOCUMENT_ROOT'] . '/../.env';
+    }
+
     $lines = file($file);
 
     foreach ($lines as $line) {
