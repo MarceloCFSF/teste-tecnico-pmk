@@ -1,3 +1,16 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const inputs = document.querySelectorAll("input");
+
+  inputs.forEach(input => {
+    input.addEventListener("input", function () {
+      const errorDiv = this.nextElementSibling;
+      if (errorDiv && errorDiv.classList.contains("error")) {
+        errorDiv.remove();
+      }
+    });
+  });
+});
+
 function toggleInput() {
   var paymentType = document.querySelector('input[name="payment_type"]:checked')?.value;
   var debitField = document.getElementById('debit_field');
