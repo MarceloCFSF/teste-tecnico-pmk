@@ -5,13 +5,23 @@ namespace App\Repositories;
 use App\DTOs\DonationDTO;
 use PDO;
 
-class DonationRepository
+class DonationRepository extends Repository
 {
-  private PDO $pdo;
-
-  public function __construct(PDO $pdo)
+  public function checkIfCardExist(int $first, int $last)
   {
-    $this->pdo = $pdo;
+    $query = "SELECT COUNT(*) 
+    FROM donations 
+    WHERE first_card_numbers = :first
+      AND last_card_numbers = :last";
+    $params = [
+      "first" => $first,
+      "last" => $last
+    ];
+
+    $stmt = $this->pdo->prepare($query);
+    $stmt->execute($params);
+
+    return (bool) $stmt->fetchColumn();
   }
 
   public function create(DonationDTO $donation, int $donor_id)

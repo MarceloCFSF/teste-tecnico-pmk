@@ -85,6 +85,7 @@ $form = new FormHandler();
         <input id="last_card_numbers" name="last_card_numbers" type="number">
         <?= $form->error('last_card_numbers') ?>
       </div>
+      <?= $form->error('credit_card') ?>
     </fieldset>
 
     <fieldset>
@@ -106,7 +107,7 @@ $form = new FormHandler();
       <input id="state" name="state" value="<?= $form->old('state') ?>" type="text">
       <?= $form->error('state') ?>
 
-      <label for="city">Estado</label>
+      <label for="city">Cidade</label>
       <input id="city" name="city" value="<?= $form->old('city') ?>" type="text">
       <?= $form->error('city') ?>
     </fieldset>

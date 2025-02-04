@@ -5,14 +5,8 @@ namespace App\Repositories;
 use App\DTOs\DonorDTO;
 use PDO;
 
-class DonorRepository {
-  private PDO $pdo;
-  public $errors;
-
-  public function __construct(PDO $pdo) {
-    $this->pdo = $pdo; 
-  }
-
+class DonorRepository extends Repository
+{
   public function create(DonorDTO $donor): int {
     $query = "INSERT INTO donors (
       name,
