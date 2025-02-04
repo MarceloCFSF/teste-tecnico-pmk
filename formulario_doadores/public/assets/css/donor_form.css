@@ -1,0 +1,55 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-size: 1.25em;
+}
+
+form {
+  width: 50em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding-bottom: 3em;
+}
+
+fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+legend {
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5em;
+}
+
+.address-fields {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+}
+
+button {
+  background-color: green;
+  color: white;
+  width: 8em;
+  font-size: 1.5em;
+  border-color: transparent;
+  align-self: center;
+}
